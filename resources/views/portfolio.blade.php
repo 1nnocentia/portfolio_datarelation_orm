@@ -21,16 +21,9 @@
 
 <section class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
+        <div class="grid grid-cols-3 gap-8" id="projects-container">
             @forelse($projects as $index => $project)
-                
-                {{-- <x-project-card 
-                    :project="$project" 
-                    :hidden="$index >= 3" 
-                /> --}}
-                <a href="{{ route('portfolio.show', $project->slug) }}" class="block">
-                    <x-project-card :project="$project" />
-                </a>
+                <x-project-card :project="$project" />
             @empty
                 <div class="col-span-full text-center text-gray-500 py-12">
                     <i class="fas fa-folder-open text-6xl mb-4 text-gray-300"></i>
