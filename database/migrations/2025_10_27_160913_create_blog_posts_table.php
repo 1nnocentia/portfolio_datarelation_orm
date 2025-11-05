@@ -24,6 +24,7 @@ return new class extends Migration
             $table->boolean('featured')->default(false);
             $table->timestamp('published_at')->nullable();
             $table->unsignedBigInteger('author_id')->default(1);
+            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('views')->default(0);
             $table->integer('reading_time')->default(1); 
             $table->string('meta_title')->nullable();

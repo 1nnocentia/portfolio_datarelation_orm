@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->string('image')->nullable();
-            $table->string('category');
+            $table->unsignedBigInteger('project_category_id')->nullable();
             $table->json('technologies');
             $table->string('github_url')->nullable();
             $table->string('demo_url')->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->integer('views')->default(0);
             $table->timestamps();
             
-            $table->index(['category', 'status']);
+            $table->index(['project_category_id', 'status']);
             $table->index(['featured', 'status']);
             $table->index('views');
         });

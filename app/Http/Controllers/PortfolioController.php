@@ -9,18 +9,10 @@ class PortfolioController extends Controller {
     // Display all projects with filtering
     public function index(Request $request)
     {
-        $query = Project::query();
+        $projects = Project::whereHas('category', function ($q) use ($request) {
+          $q->where('slug', $request->category);
+        })->get();
 
-        if ($request->filled('category') && $request->category !== 'all') {
-            $query->where('category', $request->category);
-        }
-        
-    // Respect any filters applied to the query (category, etc.)
-    $projects = $query->get();
-        $categories = $this->getCategories();
-        $technologies = $this->getTechnologies();
-
-        return view('portfolio', compact('projects', 'categories', 'technologies'));
     }
 
     // Get project categories

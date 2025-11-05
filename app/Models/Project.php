@@ -14,7 +14,6 @@ class Project extends Model
         'slug',
         'description',
         'image',
-        'category',
         'technologies',
         'github_url',
         'demo_url',
@@ -34,6 +33,10 @@ class Project extends Model
         'end_date' => 'date',
         'views' => 'integer'
     ];
+
+    public function category(){
+        return $this->belongsTo(Project_Category::class, 'project_category_id');
+    }
 
     /**
      * Get projects by category
