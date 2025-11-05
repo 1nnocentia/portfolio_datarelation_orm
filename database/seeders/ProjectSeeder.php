@@ -19,7 +19,7 @@ class ProjectSeeder extends Seeder
                 'description' => 'A full-featured time management website with streak, task scheduling, reminders, and user authentication.',
                 'image' => '/images/portfolio/clockin.jpg',
                 'technologies' => ['Java', 'TailwindCSS', 'MySQL'],
-                'category' => 'web-dev', 
+                'project_category_id' => 1,
                 'github_url' => '#',
                 'demo_url' => '#',
                 'featured' => true
@@ -29,7 +29,7 @@ class ProjectSeeder extends Seeder
                 'description' => 'A set of tools for auditing smart contracts, ensuring security and compliance.',
                 'image' => '/images/portfolio/zectra.png',
                 'technologies' => ['Python', 'Node.js', 'Docker'],
-                'category' => 'automation',
+                'project_category_id' => 3,
                 'github_url' => '#',
                 'demo_url' => '#',
                 'featured' => true
@@ -39,7 +39,7 @@ class ProjectSeeder extends Seeder
                 'description' => 'A multi-platform application for sharing about mental health and self-development.',
                 'image' => '/images/portfolio/littlemonologue.png',
                 'technologies' => ['React', 'API', 'Docker'],
-                'category' => 'mobile-app', 
+                'project_category_id' => 2, 
                 'github_url' => '#',
                 'demo_url' => '#',
                 'featured' => true
@@ -49,7 +49,7 @@ class ProjectSeeder extends Seeder
                 'description' => 'Cross-platform shopping app with real-time updates and payment integration.',
                 'image' => 'https://picsum.photos/seed/default-4/800/400',
                 'technologies' => ['Flutter', 'Dart', 'Firebase'],
-                'category' => 'mobile-app', 
+                'project_category_id' => 2,
                 'github_url' => '#',
                 'demo_url' => '#',
                 'featured' => false
@@ -59,7 +59,7 @@ class ProjectSeeder extends Seeder
                 'description' => 'Responsive portfolio website built with Laravel and TailwindCSS featuring modern animations.',
                 'image' => 'https://picsum.photos/seed/default-5/800/400',
                 'technologies' => ['Laravel', 'TailwindCSS', 'JavaScript'],
-                'category' => 'web-dev',
+                'project_category_id' => 1,
                 'github_url' => '#',
                 'demo_url' => '#',
                 'featured' => false
@@ -72,7 +72,7 @@ class ProjectSeeder extends Seeder
                 'description' => $projectData['description'],
                 'image' => $projectData['image'],
                 'technologies' => $projectData['technologies'],
-                'category' => $projectData['category'],
+                'project_category_id' => $projectData['project_category_id'],
                 'github_url' => $projectData['github_url'],
                 'demo_url' => $projectData['demo_url'],
                 'featured' => $projectData['featured'],

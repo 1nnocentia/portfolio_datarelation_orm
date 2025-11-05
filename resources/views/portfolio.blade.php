@@ -24,10 +24,13 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
             @forelse($projects as $index => $project)
                 
-                <x-project-card 
+                {{-- <x-project-card 
                     :project="$project" 
                     :hidden="$index >= 3" 
-                />
+                /> --}}
+                <a href="{{ route('portfolio.show', $project->slug) }}" class="block">
+                    <x-project-card :project="$project" />
+                </a>
             @empty
                 <div class="col-span-full text-center text-gray-500 py-12">
                     <i class="fas fa-folder-open text-6xl mb-4 text-gray-300"></i>

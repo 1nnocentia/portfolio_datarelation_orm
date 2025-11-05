@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             if (Schema::hasColumn('projects', 'project_category_id')) {
-                $table->foreign('project_category_id')
-                      ->references('id')
-                      ->on('project_category')
-                      ->onDelete('cascade');
+            $table->foreign('project_category_id')
+                ->references('id')
+                ->on('project_categories')
+                ->onDelete('cascade');
             }
         });
     }

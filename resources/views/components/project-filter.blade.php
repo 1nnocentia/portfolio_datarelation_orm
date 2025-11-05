@@ -10,9 +10,9 @@
                 </button>
                 
                 @forelse($categories as $category)
-                    <button class="px-6 py-3 bg-white text-gray-700 border border-gray-200 rounded-full font-semibold hover:bg-gradient-primary hover:text-white hover:border-transparent transition-all duration-300 filter-btn" data-filter="{{ $category['key'] }}">
-                        <i class="{{ $category['icon'] }} mr-2"></i>
-                        {{ $category['name'] }}
+                    <button class="px-6 py-3 bg-white text-gray-700 border border-gray-200 rounded-full font-semibold hover:bg-gradient-primary hover:text-white hover:border-transparent transition-all duration-300 filter-btn" data-filter="{{ $category->slug }}">
+                        <i class="fas fa-folder mr-2"></i>
+                        {{ $category->name ?? $category->category }}
                     </button>
                 @empty
                     <button class="px-6 py-3 bg-white text-gray-700 border border-gray-200 rounded-full font-semibold hover:bg-gray-100 transition-colors" data-filter="web">

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('description');
             $table->string('image')->nullable();
-            $table->unsignedBigInteger('project_category_id')->nullable();
+            // $table->unsignedBigInteger('project_category_id')->nullable();
+            $table->foreignId('project_category_id')->constrained('project_categories');
             $table->json('technologies');
             $table->string('github_url')->nullable();
             $table->string('demo_url')->nullable();

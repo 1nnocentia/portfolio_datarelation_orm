@@ -20,6 +20,8 @@ Route::get('/resume/download', [ResumeController::class, 'download'])->name('res
 
 // Portfolio
 Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
+Route::get('/portfolio/{slug}', [PortfolioController::class, 'show'])->name('portfolio.show');
+Route::get('/portfolio/{slug}', [PortfolioController::class, 'show'])->name('portfolio.show');
 
 // Blog
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');

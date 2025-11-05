@@ -13,10 +13,14 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $default = [
-            ['name' => 'Han Inno', 'email' => 'inno@email.com', 'password' => bcrypt('password')],
+            ['name' => 'Han Inno', 'email' => 'inno@example.com', 'password' => bcrypt('password')],
         ];
 
-        User::create($default);
+        User::create([
+            'name' => $default[0]['name'],
+            'email' => $default[0]['email'],
+            'password' => $default[0]['password'],
+        ]);
 
         if (User::count() < 5) {
             User::factory()->count(5 - User::count())->create();

@@ -14,6 +14,7 @@ class Project extends Model
         'slug',
         'description',
         'image',
+        'project_category_id',
         'technologies',
         'github_url',
         'demo_url',
@@ -35,7 +36,7 @@ class Project extends Model
     ];
 
     public function category(){
-        return $this->belongsTo(Project_Category::class, 'project_category_id');
+        return $this->belongsTo(ProjectCategory::class, 'project_category_id');
     }
 
     /**
@@ -46,7 +47,13 @@ class Project extends Model
         if ($category === 'all') {
             return self::all();
         }
-        return self::where('category', $category)->get();
+        if (is_numeric($category)) {
+            return self::where('project_category_id', (int) $category)->get();
+        }
+
+        return self::whereHas('category', function ($q) use ($category) {
+            $q->where('category', $category);
+        })->get();
     }
 
     /**
@@ -72,7 +79,7 @@ class Project extends Model
      */
     public static function findBySlug($slug)
     {
-        return self::where('slug', $slug)->first();
+        return self::where('slug', $slug)->with('category')->first();
     }
 
     /**

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Project;
+use App\Models\ProjectCategory;
 use Illuminate\Support\Str;
 
 /**
@@ -28,7 +29,7 @@ class ProjectFactory extends Factory
             'slug' => $slug,
             'description' => $this->faker->paragraph(3),
             'image' => 'https://picsum.photos/seed/' . $slug . '/800/600',
-            'category' => $this->faker->randomElement(['web-dev', 'mobile-app', 'data-science', 'automation']),
+            'project_category_id' => ProjectCategory::inRandomOrder()->value('id') ?? 1,
             'technologies' => $this->faker->randomElements(
                 ['Laravel', 'Flutter', 'Python', 'Vue.js', 'React', 'Tailwind CSS', 'MySQL'], 
                 $this->faker->numberBetween(2, 4)
