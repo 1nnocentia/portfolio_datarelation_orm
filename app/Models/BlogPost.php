@@ -36,6 +36,10 @@ class BlogPost extends Model
         'reading_time' => 'integer'
     ];
 
+    public function author(){
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
     /**
      * Get published posts
      */
