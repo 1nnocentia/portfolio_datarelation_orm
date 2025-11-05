@@ -57,9 +57,16 @@ html {
     @apply text-gray-600 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-md transition-colors duration-200;
 }
 
-.bg-gradient-primary {
+/* .bg-gradient-primary {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+} */
+
+@layer utilities {
+  .bg-gradient-primary {
+    background: linear-gradient(to right, #6366f1, #8b5cf6);
+  }
 }
+
 
 .shadow-glow {
     box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
