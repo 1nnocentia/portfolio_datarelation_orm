@@ -66,8 +66,8 @@ class BlogPostSeeder extends Seeder
             }
         }
 
-        if (BlogPost::count() < 10) {
-            BlogPost::factory()->count(10 - BlogPost::count())->create();
+        if (BlogPost::count() < 20) {
+            BlogPost::factory()->count(20 - BlogPost::count())->create();
         }
     }
 }
