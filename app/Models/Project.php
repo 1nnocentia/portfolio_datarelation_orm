@@ -89,4 +89,14 @@ class Project extends Model
     {
         $this->increment('views');
     }
+
+    /**
+     * The skills attached to the project (many-to-many pivot)
+     */
+    
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, 'project_skill');
+    }
 }

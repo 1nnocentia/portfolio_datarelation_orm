@@ -15,29 +15,17 @@ class PortfolioController extends Controller {
 
         if ($categorySlug) {
             $category = ProjectCategory::where('slug', $categorySlug)->first();
-
-            $projects = $category ? $category->projects : collect();
+            $projects = $category
+                ? $category->projects()->with(['category', 'skills'])->get()
+                : collect();
         } else {
-            $projects = Project::all();
+            $projects = Project::with(['category', 'skills'])->get();
         }
 
         $categories = $this->getCategories();
 
         return view('portfolio', compact('projects', 'categories'));
     }
-
-    // private function getCategories()
-    // {
-    //     return ProjectCategory::select('id', 'category')
-    //         ->get()
-    //         ->map(function ($category) {
-    //             return [
-    //                 'key' => $category->category,
-    //                 'name' => ucwords(str_replace('-', ' ', $category->category)),
-    //                 'icon' => 'fas fa-folder',
-    //             ];
-    //         });
-    // }
 
     private function getCategories()
     {
@@ -52,7 +40,8 @@ class PortfolioController extends Controller {
      */
     public function show($slug)
     {
-        $project = Project::where('slug', $slug)->first();
+        // $project = Project::where('slug', $slug)->first();
+        $project = Project::with(['category', 'skills'])->where('slug', $slug)->firstOrFail();
 
         if (! $project) {
             abort(404, "Project Not Found");
@@ -62,62 +51,4 @@ class PortfolioController extends Controller {
 
         return view('projects.show', compact('project', 'categories'));
     }
-    private function getCategoryIcon($categoryName)
-    {
-        $icons = [
-            'Web Development' => 'fas fa-globe',
-            'Mobile Apps'     => 'fas fa-mobile-alt',
-            'Data Science'    => 'fas fa-brain',
-            'Automation'      => 'fas fa-robot',
-        ];
-
-        return $icons[$categoryName] ?? 'fas fa-folder';
-    }
-
-
-
-    // Get project categories
-    // private function getCategories()
-    // {
-    //     $uniqueCategories = Project::distinct()->pluck('project_category_id')->filter()->values();
-
-    //     $categoryDetails = [
-    //         'web-dev'    => ['name' => 'Web Development', 'icon' => 'fas fa-globe'],
-    //         'mobile-app' => ['name' => 'Mobile Apps', 'icon' => 'fas fa-mobile-alt'],
-    //         'data-science' => ['name' => 'Data Science', 'icon' => 'fas fa-brain'],
-    //         'automation' => ['name' => 'Automation', 'icon' => 'fas fa-robot'],
-    //     ];
-
-    //     $formattedCategories = [];
-    //     foreach ($uniqueCategories as $key) {
-    //         if (isset($categoryDetails[$key])) {
-    //             $formattedCategories[] = [
-    //                 'key' => $key,
-    //                 'name' => $categoryDetails[$key]['name'],
-    //                 'icon' => $categoryDetails[$key]['icon'],
-    //             ];
-    //         } else {
-    //              $formattedCategories[] = [
-    //                 'key' => $key,
-    //                 'name' => ucfirst(str_replace('-', ' ', $key)), // Coba buat nama otomatis
-    //                 'icon' => 'fas fa-folder',
-    //             ];
-    //         }
-    //     }
-    //     return $formattedCategories;
-    // }
-
-    // Available tech
-    private function getTechnologies()
-    {
-        return [
-            ['name' => 'Laravel', 'icon' => 'fab fa-laravel', 'color' => 'text-red-500'],
-            ['name' => 'React', 'icon' => 'fab fa-react', 'color' => 'text-blue-500'],
-            ['name' => 'JavaScript', 'icon' => 'fab fa-js-square', 'color' => 'text-yellow-500'],
-            ['name' => 'Python', 'icon' => 'fab fa-python', 'color' => 'text-green-500'],
-            ['name' => 'Node.js', 'icon' => 'fab fa-node-js', 'color' => 'text-green-600'],
-            ['name' => 'Docker', 'icon' => 'fab fa-docker', 'color' => 'text-blue-600']
-        ];
-    }
-
 }

@@ -11,7 +11,6 @@ class Skill extends Model
 
     protected $fillable = [
         'name',
-        'category',
         'level',
         'icon',
         'color',
@@ -28,45 +27,9 @@ class Skill extends Model
         'order' => 'integer'
     ];
 
-    /**
-     * Get skills by category
-     */
-    public static function getByCategory($category)
-    {
-        return self::where('category', $category)
-                   ->orderBy('order')
-                   ->get();
-    }
 
-    /**
-     * Get all categories
-     */
-    public static function getCategories()
+    public function projects()
     {
-        return self::distinct('category')
-                   ->pluck('category')
-                   ->filter()
-                   ->values();
-    }
-
-    /**
-     * Get skills with high proficiency
-     */
-    public static function getExpert($minProficiency = 80)
-    {
-        return self::where('proficiency', '>=', $minProficiency)
-                   ->orderBy('proficiency', 'desc')
-                   ->get();
-    }
-
-    /**
-     * Get skills for display on home page
-     */
-    public static function getForHomePage($limit = 8)
-    {
-        return self::where('status', 'active')
-                   ->orderBy('proficiency', 'desc')
-                   ->limit($limit)
-                   ->get();
+        return $this->belongsToMany(Project::class, 'project_skill');
     }
 }

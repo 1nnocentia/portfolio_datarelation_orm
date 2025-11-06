@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('category'); 
             $table->integer('level')->default(1);
             $table->string('icon')->nullable();
             $table->string('color')->default('#3b82f6'); 
@@ -24,9 +23,9 @@ return new class extends Migration
             $table->integer('order')->default(0);
             $table->timestamps();
 
-            $table->index(['category', 'status']);
-            $table->index(['proficiency', 'status']);
-            $table->index('order');
+            $table->index(['status']);
+            $table->index(['proficiency']);
+
         });
     }
 
