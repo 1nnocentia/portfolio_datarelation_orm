@@ -32,8 +32,6 @@ class ProjectFactory extends Factory
             'description' => $this->faker->paragraph(3),
             'image' => 'https://picsum.photos/seed/' . $slug . '/800/600',
             'project_category_id' => ProjectCategory::inRandomOrder()->value('id') ?? 1,
-            // initialize technologies as empty array to satisfy NOT NULL constraint;
-            // actual skill names will be written after creation in configure()->afterCreating
             'technologies' => [],
             'github_url' => 'https://github.com/1nnocentia/' . $slug,
             'demo_url' => $this->faker->optional()->url(),
@@ -50,7 +48,6 @@ class ProjectFactory extends Factory
     public function configure(): self
     {
         return $this->afterCreating(function (Project $project) {
-            // pick existing skills; if none exist, create a default set
             $skills = Skill::inRandomOrder()->take(rand(2, 4))->pluck('id')->toArray();
 
             if (empty($skills)) {
@@ -64,7 +61,6 @@ class ProjectFactory extends Factory
                 $skills = Skill::inRandomOrder()->take(rand(2, 4))->pluck('id')->toArray();
             }
 
-            // attach via Eloquent pivot and populate the technologies JSON column
             $project->skills()->sync($skills);
             $project->load('skills');
             $skillNames = $project->skills->pluck('name')->toArray();
